@@ -13,9 +13,11 @@ struct RepoSearch: ReducerProtocol {
       // MARK: 상태들을 변화시키는 사용자의 액션은 무엇인가?
     case keywordChanged(String)
     case search
+      // 데이터를 로드해서 성공, 실패에 대한 액션.
     case dataLoaded(TaskResult<RepositoryModel>)
   }
 
+    // ✅ 의존성 부여.
   @Dependency(\.repoSearchClient) var repoSearchClient
   @Dependency(\.continuousClock) var clock
 
@@ -50,11 +52,13 @@ struct RepoSearch: ReducerProtocol {
         await send(.dataLoaded(result))
       }
 
+        // 성공 시
     case let .dataLoaded(.success(repositoryModel)):
       state.isLoading = false
       state.searchResults = repositoryModel.items.map { $0.name }
       return .none
 
+        // 실패 시
     case .dataLoaded(.failure):
       state.isLoading = false
       state.searchResults = []
