@@ -12,6 +12,7 @@ struct RepoSearchView: View {
         // 이후 viewStore 을 통해서 값과 로직에 접근.
       NavigationView {
         Group {
+            // 요청 횟수를 뷰에서 보여줌.
           Text("\(viewStore.requestCount)")
           Spacer()
 

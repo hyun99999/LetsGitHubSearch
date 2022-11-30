@@ -38,6 +38,7 @@ final class RepositoryTests: XCTestCase {
     }
   }
 
+    // ✅ workshop 3 테스트 진행.
   func test_request_count_not_changed_when_keyword_cleared_within_debounce_time() async {
     let store = TestStore(
       initialState: RepoSearch.State(),
