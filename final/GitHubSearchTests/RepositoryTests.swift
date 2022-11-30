@@ -12,6 +12,7 @@ final class RepositoryTests: XCTestCase {
       reducer: RepoSearch()
     )
 
+      // ✅ Dependency 사용.
     store.dependencies.repoSearchClient.search = { _ in .mock }
 
     await store.send(.keywordChanged("Swift")) {
@@ -22,6 +23,7 @@ final class RepositoryTests: XCTestCase {
       $0.isLoading = true
     }
 
+      // mock 데이터를 가지고 성공에 대한 테스트 진행.
     await store.receive(.dataLoaded(.success(.mock))) {
       $0.isLoading = false
       $0.searchResults = [

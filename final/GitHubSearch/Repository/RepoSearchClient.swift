@@ -7,6 +7,7 @@ struct RepoSearchClient {
   var search: @Sendable (String) async throws -> RepositoryModel
 }
 
+// ✅ Dependency.
 extension DependencyValues {
   var repoSearchClient: RepoSearchClient {
     get { self[RepoSearchClient.self] }
