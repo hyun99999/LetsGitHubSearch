@@ -9,6 +9,7 @@ struct RepoSearchView: View {
     WithViewStore(self.store) { viewStore in
       NavigationView {
         Group {
+            // 요청 횟수를 뷰에서 보여줌.
           Text("\(viewStore.requestCount)")
           Spacer()
 
