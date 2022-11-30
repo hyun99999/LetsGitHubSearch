@@ -3,10 +3,13 @@ import SwiftUI
 import ComposableArchitecture
 
 struct RepoSearchView: View {
+    // ✅ Store 형태로 변형하기 위해 StoreOf 사용.
   let store: StoreOf<RepoSearch>
 
   var body: some View {
+      // ✅ Store 을 관찰이 가능하도록 변형.
     WithViewStore(self.store) { viewStore in
+        // 이후 viewStore 을 통해서 값과 로직에 접근.
       NavigationView {
         Group {
           Text("\(viewStore.requestCount)")

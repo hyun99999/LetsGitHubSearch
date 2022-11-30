@@ -7,6 +7,7 @@ import ComposableArchitecture
 @MainActor
 final class RepositoryTests: XCTestCase {
   func test_user_get_repo_search_results_when_search() async {
+   // ✅ 테스트를 위한 Store 는 TestStore 로 생성 가능.
     let store = TestStore(
       initialState: RepoSearch.State(),
       reducer: RepoSearch()
