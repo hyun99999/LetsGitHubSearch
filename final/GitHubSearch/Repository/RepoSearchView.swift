@@ -11,30 +11,28 @@ struct RepoSearchView: View {
     WithViewStore(self.store) { viewStore in
         // 이후 viewStore 을 통해서 값과 로직에 접근.
       NavigationView {
-        VStack {
-          HStack {
-            TextField(
-              "Search repo",
-              text: Binding(
-                get: { viewStore.keyword },
-                set: { viewStore.send(.keywordChanged($0)) }
-              )
-            )
-            .textFieldStyle(.roundedBorder)
+        Group {
+          Text("\(viewStore.requestCount)")
+          Spacer()
 
-            Button("Search") {
-              viewStore.send(.search)
-            }
-            .buttonStyle(.borderedProminent)
-          }
-          .padding()
-
-          List {
-            ForEach(viewStore.searchResults, id: \.self) {
-              Text($0)
+          if(viewStore.isLoading) {
+            ProgressView()
+          } else {
+            List {
+              ForEach(viewStore.searchResults, id: \.self) { repo in
+                Text(repo)
+              }
             }
           }
+
+          Spacer()
         }
+        .searchable(
+          text: Binding(
+            get: { viewStore.keyword },
+            set: { viewStore.send(.keywordChanged($0)) }
+          )
+        )
         .navigationTitle("Github Search")
       }
     }
